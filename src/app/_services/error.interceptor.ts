@@ -23,7 +23,7 @@ export class ErrorInterceptor implements HttpInterceptor {
     return next.handle(req).pipe(
       catchError((error) => {
         if (error.status === 401) {
-          return throwError(error.error.title);
+          return throwError(error.statusText ? error.statusText : error.error.title);
         }
 
         if (error instanceof HttpErrorResponse) {
