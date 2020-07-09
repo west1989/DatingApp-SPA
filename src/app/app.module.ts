@@ -21,6 +21,7 @@ import { appRoutes } from './routes';
 import { MemberCardComponent } from './members/member-card/member-card.component';
 import { MemberDetailComponent } from './members/member-detail/member-detail.component';
 import { MemberEditComponent } from './members/member-edit/member-edit.component';
+import { PhotoEditorComponent } from './members/photo-editor/photo-editor.component';
 
 export function tokenGetter() {
   return localStorage.getItem('token');
@@ -37,7 +38,8 @@ export function tokenGetter() {
     ListsComponent,
     MemberCardComponent,
     MemberDetailComponent,
-    MemberEditComponent
+    MemberEditComponent,
+    PhotoEditorComponent
   ],
   imports: [
     BrowserModule,
