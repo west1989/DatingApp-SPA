@@ -11,10 +11,19 @@ import { AlertifyService } from '../_services/alertify.service';
 })
 export class NavComponent implements OnInit {
   model: any = {};
+  photoUrl: string;
 
-  constructor(public authSerice: AuthService, private alertify: AlertifyService, private router: Router) {}
+  constructor(
+    public authSerice: AuthService,
+    private alertify: AlertifyService,
+    private router: Router
+  ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.authSerice.currentPhotoUrl.subscribe(
+      (photoUrl) => (this.photoUrl = photoUrl)
+    );
+  }
 
   login() {
     this.authSerice.login(this.model).subscribe(
@@ -36,8 +45,10 @@ export class NavComponent implements OnInit {
 
   logout() {
     localStorage.removeItem('token');
+    localStorage.removeItem('user');
+    this.authSerice.decodedToken = null;
+    this.authSerice.currentUser = null;
     this.alertify.message('logged out');
     this.router.navigate(['/home']);
   }
-
 }
